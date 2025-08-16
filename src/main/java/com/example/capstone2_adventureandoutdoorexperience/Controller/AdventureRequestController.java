@@ -29,30 +29,22 @@ public class AdventureRequestController {
 
 
     @PostMapping("/addAdventureRequest")
-    public ResponseEntity<?> addAdventureRequest(@Valid @RequestBody AdventureRequest adventureRequest , Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> addAdventureRequest(@Valid @RequestBody AdventureRequest adventureRequest){
+
         adventureRequestService.addAdventureRequest(adventureRequest);
         return ResponseEntity.status(200).body(new ApiResponse("The AdventureRequest is added Successfully"));
     }
 
 
     @PostMapping("/addAdventureRequests")
-    public ResponseEntity<ApiResponse> addAdventureRequests(@RequestBody @Valid List<AdventureRequest> requests, Errors errors){
-        if (errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<ApiResponse> addAdventureRequests(@RequestBody @Valid List<AdventureRequest> requests){
         adventureRequestService.addAdventureRequests(requests);
         return ResponseEntity.ok(new ApiResponse("Adventure requests added successfully"));
     }
 
 
     @PutMapping("/updateAdventureRequest/{id}")
-    public ResponseEntity<?> updateAdventureRequest(@PathVariable Integer id , @Valid @RequestBody AdventureRequest adventureRequest , Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> updateAdventureRequest(@PathVariable Integer id , @Valid @RequestBody AdventureRequest adventureRequest){
         adventureRequestService.updateAdventureRequest(id ,adventureRequest);
         return ResponseEntity.status(200).body(new ApiResponse("The AdventureRequest is updated  Successfully"));
     }

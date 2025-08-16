@@ -29,20 +29,14 @@ public class UserGearController {
 
     // Add gear for a specific user
     @PostMapping("/addGear")
-    public ResponseEntity<ApiResponse> addGear(@RequestBody @Valid UserGear userGear, Errors errors) {
-        if (errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<ApiResponse> addGear(@RequestBody @Valid UserGear userGear) {
 
         userGearService.addGear(userGear);
         return ResponseEntity.ok(new ApiResponse("Gear added successfully"));
     }
 
     @PostMapping("/addGears")
-    public ResponseEntity<ApiResponse> addGears(@RequestBody @Valid List<UserGear> gears, Errors errors){
-        if (errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<ApiResponse> addGears(@RequestBody @Valid List<UserGear> gears){
         userGearService.addGears(gears);
         return ResponseEntity.ok(new ApiResponse("User gears added successfully"));
     }

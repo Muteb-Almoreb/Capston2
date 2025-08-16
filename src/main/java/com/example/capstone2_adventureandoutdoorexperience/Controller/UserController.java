@@ -24,29 +24,20 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<?> addUser(@Valid @RequestBody User user , Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> addUser(@Valid @RequestBody User user){
         userService.addUser(user);
        return ResponseEntity.status(200).body(new ApiResponse("The User is added Successfully"));
     }
 
     @PostMapping("/addUsers")
-    public ResponseEntity<ApiResponse> addUsers(@RequestBody @Valid List<User> users, Errors errors) {
-        if (errors.hasErrors()) {
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<ApiResponse> addUsers(@RequestBody @Valid List<User> users) {
         userService.addUsers(users);
         return ResponseEntity.ok(new ApiResponse("Users added successfully"));
     }
 
 
     @PutMapping("/updateUser/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Integer id , @Valid @RequestBody User user , Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> updateUser(@PathVariable Integer id , @Valid @RequestBody User user){
         userService.updateUser(id , user);
         return ResponseEntity.status(200).body(new ApiResponse("The User is updated Successfully"));
     }

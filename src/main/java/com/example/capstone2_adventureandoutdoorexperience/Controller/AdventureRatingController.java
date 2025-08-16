@@ -26,21 +26,15 @@ public class AdventureRatingController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody AdventureRating rating, Errors errors){
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> add(@Valid @RequestBody AdventureRating rating){
+
         adventureRatingService.add(rating);
         return ResponseEntity.status(200).body(new ApiResponse("The Rating is add successfully"));
     }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,@Valid @RequestBody AdventureRating rating, Errors errors){
-
-        if(errors.hasErrors()){
-            return ResponseEntity.status(400).body(new ApiResponse(errors.getFieldError().getDefaultMessage()));
-        }
+    public ResponseEntity<?> update(@PathVariable Integer id,@Valid @RequestBody AdventureRating rating){
 
         adventureRatingService.update(id, rating);
 
